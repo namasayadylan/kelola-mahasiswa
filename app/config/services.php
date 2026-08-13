@@ -39,7 +39,7 @@ $di->setShared('view', function () {
             $volt->setOptions([
                 'path'      => sys_get_temp_dir() . '/',
                 'separator' => '_',
-                'always'    => true, // set false saat production
+                'always'    => true, 
             ]);
             return $volt;
         },

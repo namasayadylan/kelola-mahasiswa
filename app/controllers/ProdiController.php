@@ -19,7 +19,7 @@ class ProdiController extends ControllerBase
 
         $prodi = new Prodi();
         $prodi->kode_prodi = $this->request->getPost('kode_prodi', 'string');
-        $prodi->kode_nim   = Prodi::generateKodeNim(); // otomatis: 11, 22, 33, dst
+        $prodi->kode_nim   = Prodi::generateKodeNim(); 
         $prodi->nama_prodi = $this->request->getPost('nama_prodi', 'string');
         $prodi->jenjang    = $this->request->getPost('jenjang', 'string');
         $prodi->akreditasi = $this->request->getPost('akreditasi', 'string');

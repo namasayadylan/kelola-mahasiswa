@@ -25,7 +25,7 @@ class MahasiswaController extends ControllerBase
         }
 
         $mahasiswa = new Mahasiswa();
-        $mahasiswa->nim           = Mahasiswa::generateNim($prodi); // otomatis, urut per prodi & tahun
+        $mahasiswa->nim           = Mahasiswa::generateNim($prodi); 
         $mahasiswa->nama          = $this->request->getPost('nama', 'string');
         $mahasiswa->prodi_id      = $prodiId;
         $mahasiswa->jenis_kelamin = $this->request->getPost('jenis_kelamin', 'string');
