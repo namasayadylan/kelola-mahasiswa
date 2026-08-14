@@ -4,7 +4,7 @@
     --sidebar-w: 240px;
     --brand: #1f2a44;
     --brand-light: #2c3b5f;
-    --accent: #2563eb;
+    --accent: #ff8000e6;
     --bg: #f4f6f9;
     --text: #2a2f3a;
     --muted: #6b7280;
@@ -22,7 +22,6 @@ body {
     color: var(--text);
 }
 
-/* ---------- Layout ---------- */
 .app-layout {
     display: flex;
     min-height: 100vh;
@@ -39,7 +38,6 @@ body {
     padding: 32px 28px;
 }
 
-/* ---------- Sidebar ---------- */
 .sidebar {
     width: var(--sidebar-w);
     flex-shrink: 0;
@@ -101,7 +99,6 @@ body {
     color: #fff;
 }
 
-/* ---------- Page header ---------- */
 .page-header {
     display: flex;
     align-items: center;
@@ -112,7 +109,6 @@ body {
 .page-header h1 { margin: 0; font-size: 24px; }
 .page-subtitle { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
 
-/* ---------- Cards ---------- */
 .cards { display: flex; gap: 20px; flex-wrap: wrap; }
 .card {
     background: #fff;
@@ -140,7 +136,6 @@ body {
 .card-number { font-size: 30px; font-weight: 700; color: var(--brand); line-height: 1.1; }
 .card-label { color: var(--muted); margin-top: 4px; font-size: 13px; }
 
-/* ---------- Table ---------- */
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -162,7 +157,6 @@ body {
 .table-actions { display: flex; gap: 6px; }
 .text-center { text-align: center; color: #999; }
 
-/* ---------- Forms ---------- */
 .form-card {
     background: #fff;
     padding: 26px;
@@ -199,7 +193,6 @@ body {
 }
 .form-hint { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
 
-/* ---------- Buttons ---------- */
 .btn {
     display: inline-block;
     padding: 9px 16px;
@@ -214,18 +207,18 @@ body {
 .btn:hover { filter: brightness(0.94); }
 .btn-primary { background: var(--accent); color: #fff; }
 .btn-secondary { background: #e5e7eb; color: #111; }
-.btn-warning { background: #f59e0b; color: #fff; }
-.btn-danger { background: #dc2626; color: #fff; }
-.btn-sm { padding: 6px 12px; font-size: 12px; }
+.btn-warning { background: #dbeafe; color: #1f2a44; }
+.btn-danger { background: #dbeafe; color: #dc2626; }
+.btn-sm { padding: 6px 12px; font-size: 13px; }
 
-/* ---------- Alerts ---------- */
+
 .alert { padding: 11px 14px; border-radius: 7px; margin-bottom: 18px; font-size: 14px; }
 .alert-success { background: #d1fae5; color: #065f46; }
 .alert-danger { background: #fee2e2; color: #991b1b; }
 .alert-info { background: #dbeafe; color: #1e40af; }
 .alert-warning { background: #fef3c7; color: #92400e; }
 
-/* ---------- Responsive ---------- */
+
 @media (max-width: 768px) {
     .app-layout { flex-direction: column; }
     .sidebar {
