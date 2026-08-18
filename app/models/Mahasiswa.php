@@ -41,4 +41,19 @@ class Mahasiswa extends Model
 
         return $prefix . str_pad((string) $nomorUrut, 3, '0', STR_PAD_LEFT);
     }
+    public static function getAngkatanList(): array
+{
+    $rows = self::find(['columns' => 'nim']);
+
+    $list = [];
+    foreach ($rows as $row) {
+        if ($row->nim) {
+            $kode = substr($row->nim, 0, 2);
+            $list[$kode] = '20' . $kode;
+        }
+    }
+    krsort($list);
+
+    return $list;
+}
 }

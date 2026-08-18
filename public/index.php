@@ -8,6 +8,8 @@ ini_set('display_errors', '1');
 
 define('APP_PATH', dirname(__DIR__));
 
+require APP_PATH . '/vendor/autoload.php';
+
 try {
 
     $loader = new Loader();

@@ -1,4 +1,8 @@
 {
+    "require": {
+        "phpoffice/phpspreadsheet": "^5.9",
+        "dompdf/dompdf": "^3.1"
+    },
     "require-dev": {
         "phalcon/ide-stubs": "^5.18"
     }

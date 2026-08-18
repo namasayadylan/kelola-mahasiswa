@@ -1,6 +1,10 @@
 <div class="page-header">
     <h1>Data Program Studi</h1>
-    <a href="{{ url('prodi/new') }}" class="btn btn-primary">+ Tambah Prodi</a>
+    <div class="page-header-actions">
+        <a href="{{ url('prodi/exportexcel') }}" class="btn btn-secondary">Export Excel</a>
+        <a href="{{ url('prodi/exportpdf') }}" class="btn btn-secondary" target="_blank">Export PDF</a>
+        <a href="{{ url('prodi/new') }}" class="btn btn-primary">+ Tambah Prodi</a>
+    </div>
 </div>
 
 <table class="table">

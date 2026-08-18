@@ -1,7 +1,30 @@
 <div class="page-header">
     <h1>Data Mahasiswa</h1>
-    <a href="{{ url('mahasiswa/new') }}" class="btn btn-primary">+ Tambah Mahasiswa</a>
+    <div class="page-header-actions">
+        <a href="{{ url('mahasiswa/exportexcel') }}?prodi_id={{ selectedProdi }}&angkatan={{ selectedAngkatan }}" class="btn btn-secondary">Export Excel</a>
+        <a href="{{ url('mahasiswa/exportpdf') }}?prodi_id={{ selectedProdi }}&angkatan={{ selectedAngkatan }}" class="btn btn-secondary" target="_blank">Export PDF</a>
+        <a href="{{ url('mahasiswa/new') }}" class="btn btn-primary">+ Tambah Mahasiswa</a>
+    </div>
 </div>
+
+<form method="get" action="{{ url('mahasiswa/index') }}" class="filter-bar">
+    <select name="prodi_id">
+        <option value="">Semua Program Studi</option>
+        {% for p in prodiList %}
+        <option value="{{ p.id }}" {{ selectedProdi == p.id ? 'selected' : '' }}>{{ p.nama_prodi }}</option>
+        {% endfor %}
+    </select>
+
+    <select name="angkatan">
+        <option value="">Semua Angkatan</option>
+        {% for kode, label in angkatanList %}
+        <option value="{{ kode }}" {{ selectedAngkatan == kode ? 'selected' : '' }}>{{ label }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit" class="btn btn-secondary">Filter</button>
+    <a href="{{ url('mahasiswa/index') }}" class="btn btn-secondary">Reset</a>
+</form>
 
 <table class="table">
     <thead>
