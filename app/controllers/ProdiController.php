@@ -141,18 +141,31 @@ class ProdiController extends ControllerBase
 public function exportpdfAction()
 {
     $prodiList = Prodi::find(['order' => 'nama_prodi ASC']);
+    $totalData = count($prodiList);
 
     $html = '<html><head><meta charset="UTF-8"><style>
             body { font-family: DejaVu Sans, sans-serif; font-size: 11px; color: #1f2a44; }
-            h2 { text-align: center; margin-bottom: 2px; }
-            p.sub { text-align: center; margin-top: 0; color: #555; }
-            table { width: 100%; border-collapse: collapse; margin-top: 16px; }
-            th, td { border: 1px solid #999; padding: 6px 8px; text-align: left; }
-            th { background: #f0f2f5; }
+            .info-table { width: 100%; margin-bottom: 14px; font-size: 11px; }
+            .info-table td { border: none; padding: 1px 0; }
+            .info-table td.label { width: 130px; }
+            .info-table td.sep { width: 14px; }
+            table.data { width: 100%; border-collapse: collapse; }
+            table.data th, table.data td { border: 1px solid #999; padding: 6px 8px; text-align: left; }
+            table.data th { background: #f0f2f5; }
+            .total { text-align: right; margin-top: 10px; font-weight: bold; }
         </style></head><body>';
-    $html .= '<h2>Data Program Studi</h2>';
-    $html .= '<p class="sub">Dicetak pada ' . date('d-m-Y H:i') . '</p>';
-    $html .= '<table><thead><tr>
+        
+
+    $html .= PdfHelper::buildKopSurat();
+
+    $html .= '<h3 style="text-align:center; text-transform:uppercase; margin:0 0 14px;">Laporan Data Program Studi</h3>';
+
+    $html .= '<table class="info-table">
+            <tr><td class="label">Tanggal Cetak</td><td class="sep">:</td><td>' . date('d-m-Y H:i') . '</td></tr>
+            <tr><td class="label">Jumlah Data</td><td class="sep">:</td><td>' . $totalData . ' program studi</td></tr>
+        </table>';
+
+    $html .= '<table class="data"><thead><tr>
             <th>No</th><th>Kode Prodi</th><th>Nama Prodi</th><th>Jenjang</th><th>Akreditasi</th><th>Kode NIM</th>
         </tr></thead><tbody>';
 
@@ -169,11 +182,13 @@ public function exportpdfAction()
         $no++;
     }
 
-    if (count($prodiList) === 0) {
+    if ($totalData === 0) {
         $html .= '<tr><td colspan="6" style="text-align:center;">Belum ada data prodi.</td></tr>';
     }
 
-    $html .= '</tbody></table></body></html>';
+    $html .= '</tbody></table>';
+    $html .= '<p class="total">Total Program Studi: ' . $totalData . '</p>';
+    $html .= '</body></html>';
 
     $options = new Options();
     $options->set('isRemoteEnabled', false);
@@ -181,11 +196,13 @@ public function exportpdfAction()
 
     $dompdf = new Dompdf($options);
     $dompdf->loadHtml($html);
-    $dompdf->setPaper('A4', 'landscape');
+    $dompdf->setPaper('A4', 'potrait');
     $dompdf->render();
 
+    PdfHelper::addRunningHeader($dompdf);
+
     $this->view->disable();
-    $dompdf->stream('data-prodi-' . date('Ymd-His') . '.pdf', ['Attachment' => true]);
+    $dompdf->stream('laporan-prodi-' . date('Ymd-His') . '.pdf', ['Attachment' => true]);
     exit;
 }
 

@@ -17,6 +17,7 @@ try {
     $loader->setDirectories([
         APP_PATH . '/app/controllers/',
         APP_PATH . '/app/models/',
+        APP_PATH . '/app/library/',
     ])->register();
 
     require APP_PATH . '/app/config/services.php';

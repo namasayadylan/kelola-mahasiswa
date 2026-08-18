@@ -205,10 +205,6 @@ public function exportpdfAction()
 
     $html = '<html><head><meta charset="UTF-8"><style>
             body { font-family: DejaVu Sans, sans-serif; font-size: 11px; color: #1f2a44; }
-            .kop { text-align: center; margin-bottom: 10px; }
-            .kop .instansi { font-size: 16px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
-            .kop .judul { font-size: 13px; margin-top: 2px; text-transform: uppercase; }
-            .kop hr { border: none; border-top: 2px solid #1f2a44; margin: 8px 0 4px; }
             .info-table { width: 100%; margin-bottom: 14px; font-size: 11px; }
             .info-table td { border: none; padding: 1px 0; }
             .info-table td.label { width: 130px; }
@@ -219,11 +215,10 @@ public function exportpdfAction()
             .total { text-align: right; margin-top: 10px; font-weight: bold; }
         </style></head><body>';
 
-    $html .= '<div class="kop">
-            <div class="instansi">STMIK MARDIRA INDONESIA</div>
-            <div class="judul">Laporan Data Mahasiswa</div>
-            <hr>
-        </div>';
+
+    $html .= PdfHelper::buildKopSurat();
+
+    $html .= '<h3 style="text-align:center; text-transform:uppercase; margin:0 0 14px;">Laporan Data Mahasiswa</h3>';
 
     $html .= '<table class="info-table">
             <tr><td class="label">Tanggal Cetak</td><td class="sep">:</td><td>' . date('d-m-Y H:i') . '</td></tr>
@@ -263,8 +258,10 @@ public function exportpdfAction()
 
     $dompdf = new Dompdf($options);
     $dompdf->loadHtml($html);
-    $dompdf->setPaper('A4', 'landscape');
+    $dompdf->setPaper('A4', 'potrait');
     $dompdf->render();
+
+    PdfHelper::addRunningHeader($dompdf);
 
     $this->view->disable();
     $dompdf->stream('laporan-mahasiswa-' . date('Ymd-His') . '.pdf', ['Attachment' => true]);
